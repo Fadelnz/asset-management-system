@@ -14,7 +14,7 @@ class Auth {
             // Update last login
             $update = $db->prepare("UPDATE users SET last_login = NOW() WHERE user_id = ?");
             $update->execute([$user['user_id']]);
-            
+           
             // Set session
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
