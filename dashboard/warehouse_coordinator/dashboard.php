@@ -207,10 +207,10 @@ check_auth(['warehouse_coordinator']);
                     </div>
                 </div>
                 
-                <!-- Recent Activity and Pending Actions -->
+                <!-- Recent Activity and Pending Actions (to be sync with the database SQL)-->
                 <div class="row mt-4">
                     <div class="col-md-8">
-                        <!-- Recent Asset Movements -->
+                        <!-- Recent Asset Movements (to be sync with the database SQL)-->
                         <div class="card">
                             <div class="card-header bg-danger text-white">
                                 <h5 class="card-title mb-0">
@@ -331,7 +331,8 @@ check_auth(['warehouse_coordinator']);
                             </div>
                         </div>
                         
-                        <!-- Quick Scan -->
+                        <!--Quick Scan (using bar code to be implemented in Version 2)-->
+                         
                         <div class="card">
                             <div class="card-header bg-info text-white">
                                 <h5 class="card-title mb-0">
