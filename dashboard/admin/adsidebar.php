@@ -1,6 +1,6 @@
 <?php
 require_once '../../includes/check_auth.php';
-check_auth(['admin']); // Only admin can access
+check_auth(['admin', 'it_operation']); // Only admin can access
 ?>
 
 <!-- Sidebar -->

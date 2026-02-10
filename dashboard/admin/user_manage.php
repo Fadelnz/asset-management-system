@@ -1,7 +1,7 @@
 <?php
 require_once '../../includes/check_auth.php';
 require_once '../../includes/db.php';
-check_auth(['admin']); // Only admin can access
+check_auth(['admin','it_operation']); // Only admin can access
 
 // Get database connection from the Database class
 $conn = $db->conn;

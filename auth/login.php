@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     case 'accountant':
                         header("Location: ../dashboard/accountant/dashboard.php");
                         break;
-                    case 'warehouse_coordinator':
+                    case 'logistic_coordinator':
                         header("Location: ../dashboard/warehouse_coordinator/dashboard.php");
                         break;
                     case 'operation_manager':
@@ -50,6 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         break;
                     case 'operation_team':
                         header("Location: ../dashboard/operation/dashboard.php");
+                        break;
+                    case 'it_operation':
+                        header("Location: ../dashboard/information_system/dashboard.php");
                         break;
                     default:
                         $error = "Invalid user role";

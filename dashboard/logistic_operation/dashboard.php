@@ -1,6 +1,6 @@
 <?php
 require_once '../../includes/check_auth.php';
-check_auth(['warehouse_coordinator']);
+check_auth(['logistic_coordinator','it_operation']);
 ?>
 
 <!DOCTYPE html>

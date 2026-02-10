@@ -1,6 +1,6 @@
 <?php
 require_once '../../includes/check_auth.php';
-check_auth(['accountant']);
+check_auth(['accountant', 'it_operation']);
 ?>
 <!-- Similar structure to admin dashboard but with accountant features -->
 <!DOCTYPE html>

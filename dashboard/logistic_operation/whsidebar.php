@@ -1,6 +1,3 @@
-<?php
-// This file contains the sidebar HTML and styles for warehouse coordinator dashboard
-?>
 <style>
     .sidebar {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -52,43 +49,38 @@
         
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="dashboard.php">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-box-seam"></i> Inventory
+                <a class="nav-link" href="reg_assets.php">
+                    <i class="bi bi-plus-circle"></i> Register Assets
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="list_assets.php">
+                    <i class="bi bi-clipboard-data"></i> Inventory / Asset Reports
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="bi bi-barcode"></i> Scan Assets
+                    <i class="bi bi-arrow-left-right"></i> Issue / Return 
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="bi bi-arrow-left-right"></i> Check In/Out
+                    <i class="bi bi-check-circle"></i> Approvals / Requests
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="bi bi-truck"></i> Receiving
+                    <i class="bi bi-truck"></i> Vehicle Management
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="bi bi-clipboard-check"></i> Audit
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-map"></i> Location Tracking
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-printer"></i> Labels & Reports
+                    <i class="bi bi-tools"></i> Maintenance
                 </a>
             </li>
             <li class="nav-item mt-4">

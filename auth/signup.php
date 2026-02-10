@@ -101,6 +101,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             padding: 10px 0;
             width: 100%;
         }
+        .password-strength {
+            font-size: 0.875rem;
+            margin-top: 5px;
+        }
+        .password-match {
+            color: #198754;
+        }
+        .password-mismatch {
+            color: #dc3545;
+        }
+        .password-input-group {
+            position: relative;
+        }
+        .password-feedback {
+            position: absolute;
+            right: 10px;
+            top: 38px;
+            font-size: 1.2rem;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -125,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         <?php endif; ?>
         
-        <form method="POST" action="">
+        <form method="POST" action="" id="signupForm">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="full_name" class="form-label">Full Name *</label>
@@ -134,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 
                 <div class="col-md-6 mb-3">
-                    <label for="username" class="form-label">Username *</label>
+                    <label for="username" class="form-label">Staff ID *</label>
                     <input type="text" class="form-control" id="username" name="username" 
                            required placeholder="johndoe">
                 </div>
@@ -151,13 +171,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="password" class="form-label">Password *</label>
                     <input type="password" class="form-control" id="password" name="password" 
                            required placeholder="At least 8 characters">
-                    <small class="text-muted">Must be at least 8 characters</small>
+                    <div class="password-strength">
+                        <div id="passwordLength" class="text-muted">Must be at least 8 characters</div>
+                        <div id="passwordStrength" style="display: none;"></div>
+                    </div>
                 </div>
                 
                 <div class="col-md-6 mb-3">
                     <label for="confirm_password" class="form-label">Confirm Password *</label>
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" 
-                           required placeholder="Confirm your password">
+                    <div class="password-input-group">
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" 
+                               required placeholder="Confirm your password">
+                        <span id="passwordMatchIcon" class="password-feedback"></span>
+                    </div>
+                    <div id="passwordMatchText" class="password-strength"></div>
                 </div>
             </div>
             
@@ -168,9 +195,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <option value="">Select Role</option>
                         <option value="admin">Admin</option>
                         <option value="accountant">Accountant</option>
-                        <option value="warehouse_coordinator">Warehouse Coordinator</option>
+                        <option value="logistic_coordinator">Logistic Coordinator</option>
                         <option value="operation_manager">Operation Manager</option>
                         <option value="operation_team">Operation Team</option>
+                        <option value="it_operation">IT Operation</option>
                     </select>
                 </div>
                 
@@ -181,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             
-            <button type="submit" class="btn btn-signup mb-3">
+            <button type="submit" class="btn btn-signup mb-3" id="submitBtn">
                 <i class="bi bi-person-plus"></i> Create Account
             </button>
             
@@ -195,5 +223,127 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm_password');
+            const passwordMatchIcon = document.getElementById('passwordMatchIcon');
+            const passwordMatchText = document.getElementById('passwordMatchText');
+            const passwordStrength = document.getElementById('passwordStrength');
+            const passwordLength = document.getElementById('passwordLength');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            function checkPasswordMatch() {
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                if (confirmPassword === '') {
+                    passwordMatchIcon.style.display = 'none';
+                    passwordMatchText.textContent = '';
+                    passwordMatchText.className = 'password-strength';
+                    return;
+                }
+                
+                if (password === confirmPassword) {
+                    passwordMatchIcon.innerHTML = '<i class="bi bi-check-circle-fill text-success"></i>';
+                    passwordMatchIcon.style.display = 'block';
+                    passwordMatchText.textContent = 'Passwords match';
+                    passwordMatchText.className = 'password-strength password-match';
+                } else {
+                    passwordMatchIcon.innerHTML = '<i class="bi bi-x-circle-fill text-danger"></i>';
+                    passwordMatchIcon.style.display = 'block';
+                    passwordMatchText.textContent = 'Passwords do not match';
+                    passwordMatchText.className = 'password-strength password-mismatch';
+                }
+            }
+            
+            function checkPasswordStrength() {
+                const password = passwordInput.value;
+                
+                if (password.length === 0) {
+                    passwordLength.style.display = 'block';
+                    passwordStrength.style.display = 'none';
+                    return;
+                }
+                
+                passwordLength.style.display = 'none';
+                passwordStrength.style.display = 'block';
+                
+                let strength = 0;
+                let message = '';
+                let color = '';
+                
+                // Check length
+                if (password.length >= 8) strength++;
+                
+                // Check for mixed case
+                if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+                
+                // Check for numbers
+                if (/\d/.test(password)) strength++;
+                
+                // Check for special characters
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+                
+                switch(strength) {
+                    case 0:
+                    case 1:
+                        message = 'Very Weak';
+                        color = '#dc3545';
+                        break;
+                    case 2:
+                        message = 'Weak';
+                        color = '#fd7e14';
+                        break;
+                    case 3:
+                        message = 'Good';
+                        color = '#ffc107';
+                        break;
+                    case 4:
+                        message = 'Strong';
+                        color = '#198754';
+                        break;
+                }
+                
+                passwordStrength.innerHTML = `Strength: <span style="color: ${color}; font-weight: bold;">${message}</span>`;
+                passwordStrength.style.color = color;
+            }
+            
+            function validateForm() {
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                if (password !== confirmPassword) {
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.6';
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                }
+            }
+            
+            // Event listeners
+            passwordInput.addEventListener('input', function() {
+                checkPasswordStrength();
+                checkPasswordMatch();
+                validateForm();
+            });
+            
+            confirmPasswordInput.addEventListener('input', function() {
+                checkPasswordMatch();
+                validateForm();
+            });
+            
+            // Real-time validation on keyup
+            confirmPasswordInput.addEventListener('keyup', checkPasswordMatch);
+            
+            // Check on page load in case browser autofilled
+            setTimeout(() => {
+                checkPasswordMatch();
+                checkPasswordStrength();
+                validateForm();
+            }, 100);
+        });
+    </script>
 </body>
 </html>

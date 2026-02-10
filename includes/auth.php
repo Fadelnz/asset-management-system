@@ -47,9 +47,29 @@ class Auth {
     public static function requireRole($requiredRole) {
         self::requireLogin();
         
+        // IT Operation can access everything
+        if ($_SESSION['role'] === 'it_operation') {
+            return true;
+        }
+        
         if ($_SESSION['role'] !== $requiredRole) {
             header('HTTP/1.0 403 Forbidden');
             echo "Access denied. Required role: $requiredRole";
+            exit();
+        }
+    }
+    
+    public static function requireAnyRole($allowedRoles) {
+        self::requireLogin();
+        
+        // IT Operation can access everything
+        if ($_SESSION['role'] === 'it_operation') {
+            return true;
+        }
+        
+        if (!in_array($_SESSION['role'], $allowedRoles)) {
+            header('HTTP/1.0 403 Forbidden');
+            echo "Access denied. You need one of these roles: " . implode(', ', $allowedRoles);
             exit();
         }
     }
@@ -61,17 +81,27 @@ class Auth {
     public static function hasPermission($requiredRole) {
         if (!self::isLoggedIn()) return false;
         
+        // IT Operation has all permissions
+        if ($_SESSION['role'] === 'it_operation') {
+            return true;
+        }
+        
         $roleHierarchy = [
             'admin' => 4,
             'operations_manager' => 3,
             'accountant' => 2,
-            'warehouse_coordinator' => 1
+            'logistic_coordinator' => 1,
         ];
         
         $userLevel = $roleHierarchy[$_SESSION['role']] ?? 0;
         $requiredLevel = $roleHierarchy[$requiredRole] ?? 0;
         
         return $userLevel >= $requiredLevel;
+    }
+    
+    // Add this method for checking multiple roles
+    public static function checkRole($requiredRole) {
+        return self::requireRole($requiredRole);
     }
 }
 ?>
