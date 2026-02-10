@@ -46,43 +46,6 @@ CREATE TABLE `assets` (
   `created_by` varchar(50) DEFAULT NULL
 ) ;
 
-DELIMITER $$
-CREATE TRIGGER `asset_history_insert` AFTER INSERT ON `assets` FOR EACH ROW BEGIN
-    INSERT INTO asset_history (asset_history_id, asset_id, changed_by_user_id, change_type, change_summary)
-    VALUES (UUID(), NEW.asset_id, NEW.updated_by, 'Create', 'Asset created');
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `asset_history_update` AFTER UPDATE ON `assets` FOR EACH ROW BEGIN
-    DECLARE changes TEXT DEFAULT '';
-    
-    -- Check which fields changed
-    IF OLD.asset_name != NEW.asset_name THEN
-        SET changes = CONCAT(changes, 'Asset Name: ', OLD.asset_name, ' → ', NEW.asset_name, '; ');
-    END IF;
-    
-    IF OLD.asset_status != NEW.asset_status THEN
-        SET changes = CONCAT(changes, 'Status: ', OLD.asset_status, ' → ', NEW.asset_status, '; ');
-    END IF;
-    
-    IF OLD.location_id != NEW.location_id THEN
-        SET changes = CONCAT(changes, 'Location changed; ');
-    END IF;
-    
-    IF OLD.assigned_to_user_id != NEW.assigned_to_user_id THEN
-        SET changes = CONCAT(changes, 'Assignment changed; ');
-    END IF;
-    
-    IF changes = '' THEN
-        SET changes = 'Other updates';
-    END IF;
-    
-    INSERT INTO asset_history (asset_history_id, asset_id, changed_by_user_id, change_type, change_summary)
-    VALUES (UUID(), NEW.asset_id, NEW.updated_by, 'Update', changes);
-END
-$$
-DELIMITER ;
 
 
 
