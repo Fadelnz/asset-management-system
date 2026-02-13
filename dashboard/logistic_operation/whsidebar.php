@@ -54,12 +54,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="reg_assets.php">
+                <a class="nav-link" href="register_asset.php">
                     <i class="bi bi-plus-circle"></i> Register Assets
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="list_assets.php">
+                <a class="nav-link" href="#">
                     <i class="bi bi-clipboard-data"></i> Inventory / Asset Reports
                 </a>
             </li>
@@ -74,12 +74,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="vehicle_management.php">
                     <i class="bi bi-truck"></i> Vehicle Management
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="maintenance.php">
                     <i class="bi bi-tools"></i> Maintenance
                 </a>
             </li>
