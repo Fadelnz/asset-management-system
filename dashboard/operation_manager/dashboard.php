@@ -1,6 +1,6 @@
 <?php
 require_once '../../includes/check_auth.php';
-check_auth(['operation_manager']);
+check_auth(['operation_manager', 'it_operation']);
 ?>
 
 <!DOCTYPE html>

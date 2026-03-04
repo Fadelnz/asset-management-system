@@ -70,11 +70,6 @@ if ($pq) {
                     <i class="fas fa-tasks"></i> Task Management
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-chart-pie"></i> Analytics
-                </a>
-            </li>
             <li class="nav-item mt-4">
                 <a class="nav-link text-warning" href="#">
                     <i class="fas fa-bell"></i> Alerts
