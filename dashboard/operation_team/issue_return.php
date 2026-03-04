@@ -122,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_request'])) {
     <title>Issue / Return · Operations</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body { background: #f4f6fb; }
         .page-header {
@@ -196,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_request'])) {
             <!-- Notice -->
             <div class="info-notice">
                 <i class="bi bi-info-circle-fill mt-1 flex-shrink-0"></i>
-                <span>Your request will be sent to the <strong>Logistics Coordinator</strong> for approval. You will be able to track the status under <a href="my_requests.php" class="fw-bold">My Requests</a>.</span>
+                <span>Your request will be sent to the <strong>Logistics Coordinator</strong> for approval. You will be able to track the status under <a href="history.php" class="fw-bold">My Requests</a>.</span>
             </div>
 
             <!-- Alert -->

@@ -13,6 +13,25 @@ if ($pq) {
 }
 ?>
 
+<style>
+.sidebar {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    min-height: 100vh;
+    padding-top: 20px;
+}
+.sidebar .nav-link {
+    color: white;
+    padding: 10px 15px;
+    margin: 5px 0;
+}
+.sidebar .nav-link:hover {
+    background: rgba(255,255,255,0.1);
+}
+.sidebar .nav-link.active {
+    background: rgba(255,255,255,0.2);
+}
+</style>
 <nav class="col-md-3 col-lg-2 d-md-block sidebar">
     <div class="position-sticky">
         <div class="text-center mb-4">
