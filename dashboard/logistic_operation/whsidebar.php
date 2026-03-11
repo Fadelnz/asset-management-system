@@ -53,10 +53,6 @@
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-plus-circle"></i> Register Assets
-                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="inventory_report.php">

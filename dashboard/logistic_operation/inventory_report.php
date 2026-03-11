@@ -23,6 +23,9 @@ $filter_date_to = $_GET['date_to'] ?? '';
 $filter_warranty = $_GET['warranty_status'] ?? '';
 $search = $_GET['search'] ?? '';
 
+// Show success message after registration redirect
+$reg_success = isset($_GET['registered']) ? htmlspecialchars($_GET['asset'] ?? 'Asset') : '';
+
 // Build the query with filters
 $sql = "SELECT a.*, 
                ac.class_name,
@@ -437,6 +440,15 @@ function exportToCSV($conn) {
                             <?php endif; ?>
                         </div>
                     </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                <?php endif; ?>
+
+                <!-- Registration Success Alert -->
+                <?php if ($reg_success): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    <strong>"<?php echo $reg_success; ?>"</strong> has been registered successfully!
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
                 <?php endif; ?>
